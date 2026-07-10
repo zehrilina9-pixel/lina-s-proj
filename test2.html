@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carte Style Trello Pro</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif,
+          rgba(240, 4, 181, 0.08);
+        background-color: #a5bbcb;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      /* Conteneur de la carte (Style Trello) */
+      .trello-card {
+        background: #5e80dd;
+        border-radius: 20px;
+        box-shadow: 0 4px 12px rgba(192, 39, 200, 0.08);
+        width: 400px;
+        padding: 30px;
+        transition: transform 0.2s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        
+      }
+
+      /* Effet de survol professionnel */
+      .trello-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      }
+
+      /* Barre de dégradé Rose Pro au sommet de la carte */
+      .trello-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        /* Dégradé professionnel allant d'un rose poudré à un rose magenta profond */
+        background: linear-gradient(90deg, #1e0c67 0%, #6873dc 100%);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+      }
+
+      /* Tag / Label de la carte */
+      
+       
+      /* Titre de la tâche */
+      .card-title {
+        font-size: 16px;
+        color: #172b4d;
+        margin: 0 0 8px 0;
+        font-weight: 600;
+      }
+
+      
+
+      /* Pied de la carte (Statistiques / Date) */
+      
+
+      /* Indicateur visuel de priorité ou de progression */
+      .badge-date {
+        background-color: #61bbdc;
+        padding: 4px 6px;
+        border-radius: 3px;
+        font-weight: 500;
+      }
+      .subtitle{
+    text-align:center;
+    color:#666;
+    margin-bottom:30px;
+    line-height:1.5;
+}
+
+.feature{
+    display:flex;
+    gap:15px;
+    align-items:center;
+    background:#a3b0e6;
+    padding:15px;
+    border-radius:15px;
+    margin-bottom:15px;
+}
+
+.feature h3{
+    font-size:16px;
+}
+
+.feature p{
+    color:rgb(193, 28, 28);
+    font-size:14px;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:30px;
+    background:linear-gradient(135deg,#3b82f6,#7c3aed);
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+    margin-top:20px;
+}
+
+button:hover{
+    opacity:.9;
+}
+
+.login{
+    text-align:center;
+    margin-top:20px;
+}
+
+.login a{
+    color:#6d28d9;
+    text-decoration:none;
+    font-weight:bold;
+}
+    </style>
+  </head>
+  <body>
+    <div class="trello-card">
+      <h1>bienvenue!👋</h1>
+      <p class="subtitle">
+        Créez des conversations, partagez vos idées et restez connecté avec vos proches.
+    </p>
+
+    <div class="feature">
+        💬 <div>
+            <h3>Discussions en temps réel</h3>
+            <p>Échangez instantanément avec vos contacts.</p>
+        </div>
+    </div>
+
+    <div class="feature">
+        👥 <div>
+            <h3>Collaboration facile</h3>
+            <p>Travaillez ensemble sur vos projets.</p>
+        </div>
+    </div>
+
+    <div class="feature">
+        🔒 <div>
+            <h3>Sécurisé et privé</h3>
+            <p>Vos conversations sont protégées.</p>
+        </div>
+    </div>
+
+    <button>Commencer</button>
+
+    <p class="login">
+        Déjà un compte ? <a href="#">Se connecter</a>
+    </p>
+</div>
+</div>
+
+      
+      </div>
+    </div>
+  </body>
+</html>
