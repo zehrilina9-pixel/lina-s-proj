@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blaze &amp; Bramble — Small-Batch Hot Sauce</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&family=Work+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #1a1512;
+        --cream: #fff6e9;
+        --chili: #e8432b;
+        --mango: #ffa23a;
+        --lime: #c4da2b;
+        --plum: #6b2d5c;
+        --paper: #fffdf8;
+        --display: "Anton", sans-serif;
+        --body: "Work Sans", sans-serif;
+        --mono: "Space Mono", monospace;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--cream);
+        color: var(--ink);
+        font-family: var(--body);
+        line-height: 1.5;
+        overflow-x: hidden;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+
+      .wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 32px;
+      }
+
+      /* ---------- editable content note ---------- */
+      .edit-note {
+        background: var(--ink);
+        color: var(--cream);
+        font-family: var(--mono);
+        font-size: 12px;
+        text-align: center;
+        padding: 8px 16px;
+        letter-spacing: 0.03em;
+      }
+      .edit-note b {
+        color: var(--mango);
+      }
+
+      /* ---------- header ---------- */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--cream);
+        border-bottom: 3px solid var(--ink);
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 32px;
+      }
+      .logo {
+        font-family: var(--display);
+        font-size: 26px;
+        letter-spacing: 0.02em;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .logo .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--chili);
+        display: inline-block;
+      }
+      .nav-links {
+        display: flex;
+        gap: 36px;
+        font-family: var(--mono);
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .nav-links a {
+        position: relative;
+        padding-bottom: 4px;
+      }
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 2px;
+        background: var(--chili);
+        transition: width 0.25s ease;
+      }
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+      .nav-cta {
+        font-family: var(--mono);
+        font-size: 13px;
+        text-transform: uppercase;
+        background: var(--ink);
+        color: var(--cream);
+        padding: 10px 20px;
+        border-radius: 2px;
+        border: 2px solid var(--ink);
+        transition: background 0.2s, color 0.2s;
+      }
+      .nav-cta:hover {
+        background: var(--cream);
+        color: var(--ink);
+      }
+
+      .menu-toggle {
+        display: none;
+      }
+
+      /* ---------- hero ---------- */
+      .hero {
+        position: relative;
+        padding: 100px 32px 140px;
+        background: radial-gradient(
+            circle at 85% 15%,
+            var(--mango) 0,
+            var(--mango) 220px,
+            transparent 221px
+          ),
+          var(--cream);
+        overflow: hidden;
+        border-bottom: 3px solid var(--ink);
+      }
+      .hero-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 48px;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+      }
+      .eyebrow {
+        font-family: var(--mono);
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        background: var(--ink);
+        color: var(--lime);
+        display: inline-block;
+        padding: 6px 14px;
+        border-radius: 999px;
+        margin-bottom: 22px;
+      }
+      h1.hero-title {
+        font-family: var(--display);
+        font-size: clamp(48px, 7vw, 88px);
+        line-height: 0.95;
+        letter-spacing: 0.01em;
+        text-transform: uppercase;
+      }
+      h1.hero-title .accent {
+        color: var(--chili);
+      }
+      .hero-sub {
+        margin-top: 24px;
+        font-size: 19px;
+        max-width: 46ch;
+        color: #3a322c;
+      }
+      .hero-actions {
+        margin-top: 36px;
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        font-family: var(--mono);
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        padding: 16px 28px;
+        border-radius: 2px;
+        border: 2px solid var(--ink);
+        display: inline-block;
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+      }
+      .btn-solid {
+        background: var(--chili);
+        color: var(--paper);
+        border-color: var(--chili);
+        box-shadow: 5px 5px 0 var(--ink);
+      }
+      .btn-solid:hover {
+        transform: translate(-3px, -3px);
+        box-shadow: 8px 8px 0 var(--ink);
+      }
+      .btn-ghost {
+        background: transparent;
+        box-shadow: 5px 5px 0 var(--ink);
+      }
+      .btn-ghost:hover {
+        transform: translate(-3px, -3px);
+        box-shadow: 8px 8px 0 var(--ink);
+      }
+
+      .hero-visual {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .bottle {
+        width: 200px;
+      }
+      .bottle-card {
+        background: var(--ink);
+        border-radius: 14px;
+        padding: 44px 32px;
+        position: relative;
+        box-shadow: 10px 10px 0 var(--plum);
+        transform: rotate(-3deg);
+      }
+      .bottle-card .heat-tag {
+        position: absolute;
+        top: -16px;
+        right: -16px;
+        background: var(--lime);
+        color: var(--ink);
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 700;
+        padding: 8px 12px;
+        border-radius: 50%;
+        width: 64px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border: 3px solid var(--ink);
+        transform: rotate(8deg);
+        line-height: 1.1;
+      }
+
+      /* ---------- marquee ---------- */
+      .marquee {
+        background: var(--ink);
+        color: var(--cream);
+        border-bottom: 3px solid var(--ink);
+        overflow: hidden;
+        white-space: nowrap;
+        padding: 14px 0;
+      }
+      .marquee-track {
+        display: inline-block;
+        font-family: var(--display);
+        font-size: 20px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        animation: scroll 22s linear infinite;
+      }
+      .marquee-track span {
+        margin: 0 28px;
+        color: var(--mango);
+      }
+      @keyframes scroll {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* ---------- section shared ---------- */
+      section {
+        padding: 110px 0;
+      }
+      .section-head {
+        max-width: 640px;
+        margin-bottom: 64px;
+      }
+      .section-label {
+        font-family: var(--mono);
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--chili);
+        margin-bottom: 14px;
+      }
+      h2 {
+        font-family: var(--display);
+        font-size: clamp(34px, 4.2vw, 52px);
+        text-transform: uppercase;
+        line-height: 1.02;
+      }
+      .section-body {
+        margin-top: 18px;
+        font-size: 17px;
+        color: #4a4038;
+        max-width: 56ch;
+      }
+
+      /* ---------- products / heat meter (signature element) ---------- */
+      .products {
+        background: var(--paper);
+        border-top: 3px solid var(--ink);
+        border-bottom: 3px solid var(--ink);
+      }
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+      }
+      .product-card {
+        border: 3px solid var(--ink);
+        border-radius: 10px;
+        padding: 28px;
+        background: var(--cream);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        transition: transform 0.2s ease;
+      }
+      .product-card:hover {
+        transform: translateY(-6px);
+      }
+      .product-card:nth-child(1) {
+        background: #ffefe3;
+      }
+      .product-card:nth-child(2) {
+        background: #fff6d6;
+      }
+      .product-card:nth-child(3) {
+        background: #f1ebff;
+      }
+      .product-name {
+        font-family: var(--display);
+        font-size: 26px;
+        text-transform: uppercase;
+      }
+      .product-desc {
+        font-size: 15px;
+        color: #4a4038;
+        flex-grow: 1;
+      }
+      .heat-meter {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .heat-label {
+        font-family: var(--mono);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        display: flex;
+        justify-content: space-between;
+      }
+      .heat-bar {
+        width: 100%;
+        height: 10px;
+        background: #00000014;
+        border: 2px solid var(--ink);
+        border-radius: 999px;
+        overflow: hidden;
+      }
+      .heat-fill {
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          var(--lime),
+          var(--mango),
+          var(--chili)
+        );
+      }
+      .price-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: var(--mono);
+        font-size: 14px;
+        margin-top: 4px;
+      }
+
+      /* ---------- process timeline ---------- */
+      .process {
+        background: var(--ink);
+        color: var(--cream);
+      }
+      .process .section-label {
+        color: var(--lime);
+      }
+      .timeline {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        counter-reset: step;
+      }
+      .step {
+        border-left: 3px solid var(--mango);
+        padding-left: 20px;
+        position: relative;
+      }
+      .step-num {
+        font-family: var(--mono);
+        font-size: 13px;
+        color: var(--mango);
+        margin-bottom: 10px;
+        display: block;
+      }
+      .step h3 {
+        font-family: var(--display);
+        font-size: 20px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+      .step p {
+        font-size: 14.5px;
+        color: #cfc6ba;
+      }
+
+      /* ---------- testimonials ---------- */
+      .testimonials {
+        background: var(--lime);
+        border-top: 3px solid var(--ink);
+        border-bottom: 3px solid var(--ink);
+      }
+      .test-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+      }
+      .test-card {
+        background: var(--paper);
+        border: 3px solid var(--ink);
+        border-radius: 10px;
+        padding: 26px;
+        box-shadow: 6px 6px 0 var(--ink);
+      }
+      .test-quote {
+        font-size: 16px;
+        margin-bottom: 18px;
+      }
+      .test-name {
+        font-family: var(--mono);
+        font-size: 12px;
+        text-transform: uppercase;
+        color: var(--plum);
+      }
+
+      /* ---------- newsletter / CTA ---------- */
+      .cta {
+        background: var(--chili);
+        color: var(--paper);
+        text-align: center;
+      }
+      .cta h2 {
+        color: var(--paper);
+      }
+      .cta .section-body {
+        color: #ffe8df;
+        margin: 18px auto 0;
+      }
+      .cta-form {
+        margin-top: 36px;
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .cta-form input[type="email"] {
+        font-family: var(--body);
+        font-size: 15px;
+        padding: 16px 18px;
+        border-radius: 2px;
+        border: 2px solid var(--ink);
+        min-width: 280px;
+      }
+      .cta-form .btn-solid {
+        background: var(--ink);
+        border-color: var(--ink);
+        box-shadow: 5px 5px 0 var(--plum);
+      }
+      .cta-form .btn-solid:hover {
+        box-shadow: 8px 8px 0 var(--plum);
+      }
+
+      /* ---------- footer ---------- */
+      footer {
+        background: var(--ink);
+        color: var(--cream);
+        padding: 64px 0 32px;
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr 1fr 1fr;
+        gap: 40px;
+        padding-bottom: 48px;
+        border-bottom: 1px solid #ffffff22;
+      }
+      .footer-logo {
+        font-family: var(--display);
+        font-size: 24px;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+      }
+      footer p {
+        color: #cfc6ba;
+        font-size: 14.5px;
+        max-width: 32ch;
+      }
+      .footer-col h4 {
+        font-family: var(--mono);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--mango);
+        margin-bottom: 14px;
+      }
+      .footer-col a {
+        display: block;
+        font-size: 14.5px;
+        color: #e7e0d4;
+        margin-bottom: 10px;
+      }
+      .footer-col a:hover {
+        color: var(--lime);
+      }
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 24px;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: #8a8074;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      /* ---------- responsive ---------- */
+      @media (max-width: 900px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-visual {
+          order: -1;
+        }
+        .product-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .timeline {
+          grid-template-columns: 1fr 1fr;
+        }
+        .test-grid {
+          grid-template-columns: 1fr;
+        }
+        .footer-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 640px) {
+        .nav-links {
+          display: none;
+        }
+        .product-grid {
+          grid-template-columns: 1fr;
+        }
+        .timeline {
+          grid-template-columns: 1fr;
+        }
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero {
+          padding: 70px 20px 90px;
+        }
+        section {
+          padding: 70px 0;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .marquee-track {
+          animation: none;
+        }
+        .btn-solid,
+        .btn-ghost,
+        .product-card {
+          transition: none;
+        }
+      }
+
+      a:focus-visible,
+      button:focus-visible,
+      input:focus-visible {
+        outline: 3px solid var(--plum);
+        outline-offset: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="edit-note">
+      This is a <b>placeholder design</b> for a fictional hot sauce brand — tell
+      me your real business name &amp; details and I'll swap in your content.
+    </div>
+
+    <header>
+      <div class="nav wrap">
+        <div class="logo"><span class="dot"></span>Blaze &amp; Bramble</div>
+        <nav class="nav-links">
+          <a href="#products">Sauces</a>
+          <a href="#process">Process</a>
+          <a href="#reviews">Reviews</a>
+        </nav>
+        <a href="#cta" class="nav-cta">Shop Now</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-grid wrap">
+        <div>
+          <span class="eyebrow">Small-batch • Fermented • Fiery</span>
+          <h1 class="hero-title">
+            Hot sauce with a <span class="accent">temper.</span>
+          </h1>
+          <p class="hero-sub">
+            Fermented four weeks, bottled by hand, built to wake up anything on
+            your plate. No fillers, no shortcuts — just chiles, time, and a
+            little bit of trouble.
+          </p>
+          <div class="hero-actions">
+            <a href="#products" class="btn btn-solid">Browse the lineup</a>
+            <a href="#process" class="btn btn-ghost">How it's made</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="bottle-card">
+            <div class="heat-tag">12,000<br />SHU</div>
+            <svg
+              class="bottle"
+              viewBox="0 0 200 380"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="80"
+                y="10"
+                width="40"
+                height="35"
+                rx="4"
+                fill="#C4DA2B"
+              />
+              <rect
+                x="70"
+                y="45"
+                width="60"
+                height="20"
+                rx="3"
+                fill="#1A1512"
+              />
+              <path
+                d="M55 65 Q55 65 60 90 L60 330 Q60 350 80 350 L120 350 Q140 350 140 330 L140 90 Q145 65 145 65 Z"
+                fill="#E8432B"
+              />
+              <rect
+                x="60"
+                y="140"
+                width="80"
+                height="120"
+                fill="#FFF6E9"
+                opacity="0.92"
+              />
+              <text
+                x="100"
+                y="185"
+                text-anchor="middle"
+                font-family="Anton"
+                font-size="18"
+                fill="#1A1512"
+              >
+                BLAZE
+              </text>
+              <text
+                x="100"
+                y="205"
+                text-anchor="middle"
+                font-family="Anton"
+                font-size="18"
+                fill="#1A1512"
+              >
+                &amp;
+              </text>
+              <text
+                x="100"
+                y="225"
+                text-anchor="middle"
+                font-family="Anton"
+                font-size="18"
+                fill="#1A1512"
+              >
+                BRAMBLE
+              </text>
+              <text
+                x="100"
+                y="248"
+                text-anchor="middle"
+                font-family="Space Mono"
+                font-size="10"
+                fill="#6B2D5C"
+              >
+                ORIGINAL RED
+              </text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee">
+      <div class="marquee-track">
+        <span>★ FERMENTED 28 DAYS</span><span>★ NO ARTIFICIAL COLOR</span
+        ><span>★ SMALL BATCH ONLY</span><span>★ HAND BOTTLED</span>
+        <span>★ FERMENTED 28 DAYS</span><span>★ NO ARTIFICIAL COLOR</span
+        ><span>★ SMALL BATCH ONLY</span><span>★ HAND BOTTLED</span>
+      </div>
+    </div>
+
+    <section class="products" id="products">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-label">The Lineup</div>
+          <h2>Three heats. One habit.</h2>
+          <p class="section-body">
+            Each bottle starts as whole chiles and salt, nothing else —
+            fermentation does the rest of the work over four slow weeks.
+          </p>
+        </div>
+        <div class="product-grid">
+          <div class="product-card">
+            <div class="product-name">Original Red</div>
+            <p class="product-desc">
+              Ripe red jalapeño and garlic, fermented low and slow for a bright,
+              tangy heat that plays well with everything.
+            </p>
+            <div class="heat-meter">
+              <div class="heat-label">
+                <span>Heat</span><span>12,000 SHU</span>
+              </div>
+              <div class="heat-bar">
+                <div class="heat-fill" style="width: 35%"></div>
+              </div>
+            </div>
+            <div class="price-row">
+              <span>5 oz bottle</span><span>$11</span>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-name">Mango Reaper</div>
+            <p class="product-desc">
+              Carolina reaper cooled with sweet mango and lime — a slow build
+              that sneaks up after the third bite.
+            </p>
+            <div class="heat-meter">
+              <div class="heat-label">
+                <span>Heat</span><span>90,000 SHU</span>
+              </div>
+              <div class="heat-bar">
+                <div class="heat-fill" style="width: 78%"></div>
+              </div>
+            </div>
+            <div class="price-row">
+              <span>5 oz bottle</span><span>$13</span>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-name">Smoked Bramble</div>
+            <p class="product-desc">
+              Blackberries and smoked chipotle, deep and savory — built for
+              grilled meat and cast iron.
+            </p>
+            <div class="heat-meter">
+              <div class="heat-label">
+                <span>Heat</span><span>18,000 SHU</span>
+              </div>
+              <div class="heat-bar">
+                <div class="heat-fill" style="width: 45%"></div>
+              </div>
+            </div>
+            <div class="price-row">
+              <span>5 oz bottle</span><span>$12</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="process" id="process">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-label">The Process</div>
+          <h2>From chile to bottle, four weeks.</h2>
+        </div>
+        <div class="timeline">
+          <div class="step">
+            <span class="step-num">Week 1</span>
+            <h3>Mash</h3>
+            <p>
+              Fresh chiles are stemmed, salted, and packed into fermentation
+              crocks the same day they're picked.
+            </p>
+          </div>
+          <div class="step">
+            <span class="step-num">Week 2–3</span>
+            <h3>Ferment</h3>
+            <p>
+              Wild lacto-fermentation builds tang and depth — we taste every
+              batch to know when it's ready.
+            </p>
+          </div>
+          <div class="step">
+            <span class="step-num">Week 4</span>
+            <h3>Blend</h3>
+            <p>
+              Mashed chiles are blended with vinegar and fruit, then rested
+              again to let the flavors settle.
+            </p>
+          </div>
+          <div class="step">
+            <span class="step-num">Bottling day</span>
+            <h3>Bottle</h3>
+            <p>
+              Every bottle is filled, labeled, and capped by hand in small runs
+              — no large-batch shortcuts.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials" id="reviews">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-label">Word on the street</div>
+          <h2>People keep coming back for more.</h2>
+        </div>
+        <div class="test-grid">
+          <div class="test-card">
+            <p class="test-quote">
+              "Mango Reaper is the only hot sauce in my fridge that gets its own
+              shelf. It's that good."
+            </p>
+            <div class="test-name">— Priya N.</div>
+          </div>
+          <div class="test-card">
+            <p class="test-quote">
+              "Smoked Bramble on grilled chicken changed my whole summer.
+              Ordered three more bottles."
+            </p>
+            <div class="test-name">— Marcus D.</div>
+          </div>
+          <div class="test-card">
+            <p class="test-quote">
+              "You can actually taste the fermentation — nothing like the sugary
+              stuff at the store."
+            </p>
+            <div class="test-name">— Elena R.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="cta">
+      <div class="wrap">
+        <h2>Get first pick of new batches.</h2>
+        <p class="section-body">
+          We brew in small runs and they sell out fast. Join the list to hear
+          when a new batch drops.
+        </p>
+        <form class="cta-form" onsubmit="return false;">
+          <input
+            type="email"
+            placeholder="you@email.com"
+            aria-label="Email address"
+            required
+          />
+          <button type="submit" class="btn btn-solid">Notify me</button>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-logo">Blaze &amp; Bramble</div>
+            <p>
+              Small-batch fermented hot sauce, made by hand in small runs and
+              sold before we can make more.
+            </p>
+          </div>
+          <div class="footer-col">
+            <h4>Shop</h4>
+            <a href="#products">All sauces</a>
+            <a href="#products">Gift sets</a>
+            <a href="#cta">Subscribe</a>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="#process">Our process</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#">Wholesale</a>
+          </div>
+          <div class="footer-col">
+            <h4>Contact</h4>
+            <a href="#">hello@blazeandbramble.example</a>
+            <a href="#">@blazeandbramble</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 Blaze &amp; Bramble. All rights reserved.</span>
+          <span>Placeholder content — swap in your real brand anytime.</span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
