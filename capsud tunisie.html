@@ -1,0 +1,2032 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capsud Tunisie — Installateur photovoltaïque</title>
+  <meta name="description" content="Capsud Tunisie : conception, installation et maintenance de systèmes photovoltaïques pour le résidentiel, l'industrie et l'agriculture. Téléphone : 55 162 938." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta property="og:title" content="Capsud Tunisie — Installateur photovoltaïque" />
+  <meta property="og:description" content="Conception, installation et maintenance de systèmes photovoltaïques en Tunisie." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800;900&display=swap" />
+
+  <style>
+    /* ============================================
+       TOKENS
+       ============================================ */
+    :root {
+      --bg:          #0a0a0a;
+      --bg-soft:     #111111;
+      --text:        #ffffff;
+      --text-soft:   #dadada;
+      --text-mute:   #888888;
+      --accent:      #cba25f;
+      --accent-soft: rgba(203, 162, 95, 0.25);
+      --line:        rgba(255, 255, 255, 0.10);
+      --line-soft:   rgba(255, 255, 255, 0.06);
+
+      --ease-quiet:    cubic-bezier(.22, 1, .36, 1);
+      --ease-precise:  cubic-bezier(.4, 0, .2, 1);
+      --ease-emphasis: cubic-bezier(.16, 1, .3, 1);
+
+      --container: 1400px;
+      --reading: 860px;
+    }
+
+    /* ============================================
+       RESET
+       ============================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    img, picture, svg, canvas { display: block; max-width: 100%; }
+    img { height: auto; }
+
+    a { color: inherit; text-decoration: none; }
+
+    button { font: inherit; background: none; border: none; color: inherit; cursor: pointer; }
+
+    ul, ol { list-style: none; }
+
+    /* ============================================
+       FOCUS VISIBLE
+       ============================================ */
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 1px;
+    }
+
+    /* ============================================
+       SKIP LINK
+       ============================================ */
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 1rem;
+      z-index: 9999;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 0.75rem 1.25rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      transition: top 0.2s var(--ease-precise);
+    }
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    /* ============================================
+       TYPOGRAPHY HELPERS
+       ============================================ */
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .eyebrow::before {
+      content: '';
+      width: 2rem;
+      height: 1px;
+      background: var(--accent);
+      display: inline-block;
+    }
+
+    .section-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2rem, 4.5vw, 3.25rem);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: var(--text);
+      max-width: 22ch;
+    }
+
+    .section-intro {
+      font-size: 1.0625rem;
+      color: var(--text-soft);
+      max-width: 60ch;
+      line-height: 1.65;
+    }
+
+    .mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* ============================================
+       LAYOUT
+       ============================================ */
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin-inline: auto;
+      padding-inline: 2rem;
+    }
+
+    section {
+      padding: 6rem 0;
+      position: relative;
+    }
+    @media (max-width: 768px) {
+      section { padding: 4rem 0; }
+      .container { padding-inline: 1.5rem; }
+    }
+
+    /* ============================================
+       NAV
+       ============================================ */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line-soft);
+      transition: background 0.3s var(--ease-precise);
+    }
+
+    .site-header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-block: 1rem;
+      gap: 2rem;
+    }
+
+    .brand {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 1.125rem;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+    .brand-dot {
+      color: var(--accent);
+    }
+    .brand-tag {
+      font-size: 0.625rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-mute);
+      font-weight: 400;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    .nav-links a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8125rem;
+      letter-spacing: 0.05em;
+      color: var(--text-soft);
+      transition: color 0.25s var(--ease-precise);
+      padding: 0.5rem 0;
+      position: relative;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a[aria-current="page"] { color: var(--accent); }
+
+    .nav-cta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 0.625rem 1.125rem;
+      transition: background 0.25s var(--ease-precise);
+    }
+    .nav-cta:hover { background: #d8b274; }
+
+    .nav-menu-toggle {
+      display: none;
+      width: 32px;
+      height: 32px;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+    }
+    .nav-menu-toggle span {
+      display: block;
+      height: 1px;
+      background: var(--text);
+      transition: transform 0.25s var(--ease-precise);
+    }
+
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+      .nav-menu-toggle { display: flex; }
+      .nav-cta { display: none; }
+    }
+
+    /* ============================================
+       HERO
+       ============================================ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 7rem;
+      padding-bottom: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.55;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.9) 70%, var(--bg) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    /* note: gradient accepté ici uniquement comme voile de lisibilité, pas comme effet décoratif */
+
+    .hero .container {
+      position: relative;
+      z-index: 2;
+      max-width: var(--reading);
+    }
+
+    .hero-eyebrow {
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: clamp(2.75rem, 7vw, 5.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      margin-bottom: 2rem;
+    }
+    .hero h1 .accent {
+      color: var(--accent);
+    }
+
+    .hero-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+      line-height: 1.6;
+      color: var(--text-soft);
+      max-width: 56ch;
+      margin-bottom: 3rem;
+      min-height: 5em;
+    }
+
+    .hero-caret {
+      display: inline-block;
+      width: 0.55em;
+      height: 1.05em;
+      background: var(--accent);
+      vertical-align: text-bottom;
+      margin-left: 2px;
+      transform: translateY(2px);
+    }
+    .hero-caret.is-hidden { opacity: 0; }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 4rem;
+    }
+
+    .btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9375rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 1rem 1.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: all 0.3s var(--ease-precise);
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+    }
+    .btn-primary:hover {
+      background: #d8b274;
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--line);
+    }
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .btn-arrow {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.25s var(--ease-precise);
+    }
+    .btn:hover .btn-arrow {
+      transform: translateX(4px);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--line-soft);
+    }
+    .hero-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .hero-meta-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6875rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-mute);
+    }
+    .hero-meta-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9375rem;
+      color: var(--text);
+    }
+    .hero-meta-value a:hover { color: var(--accent); }
+
+    /* ============================================
+       STATS BAND
+       ============================================ */
+    .stats {
+      padding: 4rem 0;
+      border-top: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
+      background: var(--bg-soft);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding-left: 1.25rem;
+      border-left: 1px solid var(--accent);
+    }
+    .stat-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: clamp(2rem, 3.5vw, 2.75rem);
+      line-height: 1;
+      color: var(--text);
+      letter-spacing: -0.03em;
+    }
+    .stat-value .unit {
+      color: var(--accent);
+      font-size: 0.7em;
+      margin-left: 0.15em;
+    }
+    .stat-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-mute);
+    }
+
+    @media (max-width: 860px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      .stats-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================
+       SERVICES
+       ============================================ */
+    .services-head {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 5rem;
+      align-items: end;
+    }
+    @media (max-width: 860px) {
+      .services-head { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    .services-list {
+      border-top: 1px solid var(--line);
+    }
+    .service-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 2fr 140px;
+      gap: 2rem;
+      padding: 2.25rem 1.5rem;
+      align-items: start;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      transition: background 0.4s var(--ease-quiet);
+    }
+    .service-row::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2px;
+      height: 0;
+      background: var(--accent);
+      transition: height 0.6s var(--ease-quiet);
+    }
+    .service-row:hover { background: rgba(203, 162, 95, 0.03); }
+    .service-row:hover::before { height: 100%; }
+
+    .service-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      color: var(--text-mute);
+      letter-spacing: 0.05em;
+      padding-top: 0.25rem;
+    }
+    .service-row:hover .service-num { color: var(--accent); }
+
+    .service-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      letter-spacing: -0.015em;
+      color: var(--text);
+      transition: color 0.4s var(--ease-quiet);
+    }
+    .service-row:hover .service-title { color: var(--accent); }
+
+    .service-desc {
+      font-size: 0.9375rem;
+      color: var(--text-soft);
+      line-height: 1.65;
+      opacity: 0.7;
+      transition: opacity 0.4s var(--ease-quiet);
+    }
+    .service-row:hover .service-desc { opacity: 1; }
+
+    .service-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--text-mute);
+      text-transform: uppercase;
+      padding-top: 0.5rem;
+      text-align: right;
+    }
+
+    @media (max-width: 860px) {
+      .service-row {
+        grid-template-columns: 60px 1fr;
+        gap: 1rem;
+        padding: 1.75rem 1rem;
+      }
+      .service-desc { grid-column: 1 / -1; padding-top: 0.5rem; }
+      .service-tag { grid-column: 1 / -1; text-align: left; padding-top: 0.25rem; }
+    }
+
+    /* ============================================
+       PROCESS (sticky two-column)
+       ============================================ */
+    .process {
+      background: var(--bg-soft);
+      border-top: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .process .container {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    @media (max-width: 960px) {
+      .process .container { grid-template-columns: 1fr; gap: 3rem; }
+    }
+
+    .process-left {
+      position: sticky;
+      top: 6rem;
+    }
+    @media (max-width: 960px) {
+      .process-left { position: static; }
+    }
+
+    .process-left .eyebrow { margin-bottom: 1.5rem; }
+    .process-left h2 { margin-bottom: 1.5rem; }
+    .process-left p {
+      color: var(--text-soft);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    .process-left .process-contact {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--line);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      color: var(--text-mute);
+    }
+    .process-left .process-contact a {
+      color: var(--accent);
+      display: block;
+      margin-top: 0.5rem;
+      font-size: 1.125rem;
+      font-weight: 700;
+    }
+
+    .process-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .process-step {
+      padding: 2.25rem 0;
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+    .process-step:first-child { border-top: 1px solid var(--line); }
+
+    .process-step-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      padding-top: 0.5rem;
+    }
+    .process-step h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      letter-spacing: -0.015em;
+      margin-bottom: 0.75rem;
+    }
+    .process-step p {
+      color: var(--text-soft);
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+    .process-step ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.25rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      color: var(--text-mute);
+      text-transform: uppercase;
+    }
+    .process-step ul li::before {
+      content: '— ';
+      color: var(--accent);
+    }
+
+    /* ============================================
+       WHY US (row accent bar)
+       ============================================ */
+    .why-head {
+      margin-bottom: 4rem;
+      max-width: var(--reading);
+    }
+    .why-head .eyebrow { margin-bottom: 1.5rem; }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    @media (max-width: 760px) {
+      .why-grid { grid-template-columns: 1fr; }
+    }
+
+    .why-item {
+      padding: 2.5rem;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      transition: background 0.4s var(--ease-quiet);
+    }
+    .why-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2px;
+      height: 0;
+      background: var(--accent);
+      transition: height 0.6s var(--ease-quiet);
+    }
+    .why-item:hover { background: rgba(203, 162, 95, 0.025); }
+    .why-item:hover::before { height: 100%; }
+
+    .why-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .why-item h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      font-size: 1.375rem;
+      letter-spacing: -0.015em;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+      transition: color 0.4s var(--ease-quiet);
+    }
+    .why-item:hover h3 { color: var(--accent); }
+    .why-item p {
+      color: var(--text-soft);
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      opacity: 0.75;
+      transition: opacity 0.4s var(--ease-quiet);
+    }
+    .why-item:hover p { opacity: 1; }
+
+    /* ============================================
+       PROJECTS
+       ============================================ */
+    .projects {
+      background: var(--bg-soft);
+      border-top: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .projects-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 4rem;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .projects-head .eyebrow { margin-bottom: 1.5rem; }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+    @media (max-width: 760px) {
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      overflow: hidden;
+      transition: border-color 0.4s var(--ease-quiet);
+    }
+    .project-card:hover { border-color: var(--accent); }
+
+    .project-image {
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      position: relative;
+    }
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(0.2) brightness(0.85);
+      transition: filter 0.6s var(--ease-quiet), transform 0.6s var(--ease-quiet);
+    }
+    .project-card:hover .project-image img {
+      filter: grayscale(0) brightness(1);
+      transform: scale(1.03);
+    }
+
+    .project-meta {
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .project-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6875rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .project-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      font-size: 1.375rem;
+      letter-spacing: -0.015em;
+      color: var(--text);
+    }
+    .project-desc {
+      color: var(--text-soft);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+    }
+    .project-specs {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line-soft);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8125rem;
+      color: var(--text-mute);
+    }
+    .project-specs strong {
+      color: var(--text);
+      font-weight: 700;
+      display: block;
+      margin-top: 0.15rem;
+    }
+
+    /* ============================================
+       CONTACT
+       ============================================ */
+    .contact .container {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    @media (max-width: 960px) {
+      .contact .container { grid-template-columns: 1fr; gap: 3rem; }
+    }
+
+    .contact-left .eyebrow { margin-bottom: 1.5rem; }
+    .contact-left h2 { margin-bottom: 1.5rem; }
+    .contact-left p {
+      color: var(--text-soft);
+      font-size: 1.0625rem;
+      line-height: 1.65;
+      margin-bottom: 3rem;
+      max-width: 48ch;
+    }
+
+    .contact-phone {
+      display: block;
+      padding: 2rem 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 2rem;
+    }
+    .contact-phone-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6875rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-mute);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .contact-phone-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      letter-spacing: -0.02em;
+      color: var(--accent);
+      line-height: 1;
+      transition: opacity 0.25s var(--ease-precise);
+    }
+    .contact-phone:hover .contact-phone-value { opacity: 0.75; }
+
+    .contact-channels {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .contact-channel {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--line-soft);
+      transition: color 0.25s var(--ease-precise);
+    }
+    .contact-channel:hover { color: var(--accent); }
+    .contact-channel-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6875rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-mute);
+      min-width: 110px;
+    }
+    .contact-channel-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9375rem;
+      color: var(--text);
+    }
+    .contact-channel:hover .contact-channel-value { color: var(--accent); }
+
+    /* form */
+    .contact-form {
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      padding: 2.5rem;
+    }
+    @media (max-width: 480px) {
+      .contact-form { padding: 1.75rem; }
+    }
+
+    .contact-form h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.015em;
+      margin-bottom: 0.5rem;
+    }
+    .contact-form .form-sub {
+      font-size: 0.875rem;
+      color: var(--text-mute);
+      margin-bottom: 2rem;
+    }
+
+    .form-row {
+      margin-bottom: 1.5rem;
+    }
+    .form-row label {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6875rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-mute);
+      margin-bottom: 0.625rem;
+    }
+    .form-row input,
+    .form-row textarea,
+    .form-row select {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--line);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      padding: 0.625rem 0;
+      transition: border-color 0.25s var(--ease-precise);
+    }
+    .form-row input:focus,
+    .form-row textarea:focus,
+    .form-row select:focus {
+      outline: none;
+      border-bottom-color: var(--accent);
+    }
+    .form-row textarea {
+      min-height: 100px;
+      resize: vertical;
+      font-family: 'Inter', sans-serif;
+    }
+    .form-row select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23cba25f' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.5rem center;
+      padding-right: 1.75rem;
+      cursor: pointer;
+    }
+    .form-row select option {
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .form-submit {
+      width: 100%;
+      background: var(--accent);
+      color: var(--bg);
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 0.9375rem;
+      letter-spacing: 0.05em;
+      padding: 1rem 1.5rem;
+      margin-top: 0.5rem;
+      transition: background 0.25s var(--ease-precise);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+    .form-submit:hover { background: #d8b274; }
+
+    .form-note {
+      font-size: 0.75rem;
+      color: var(--text-mute);
+      margin-top: 1rem;
+      line-height: 1.5;
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    .site-footer {
+      background: var(--bg);
+      border-top: 1px solid var(--line);
+      padding: 4rem 0 2rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    @media (max-width: 760px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+
+    .footer-brand {
+      max-width: 36ch;
+    }
+    .footer-brand .brand { margin-bottom: 1rem; font-size: 1.25rem; }
+    .footer-brand p {
+      color: var(--text-soft);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+    }
+
+    .footer-col h4 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6875rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-mute);
+      margin-bottom: 1.25rem;
+    }
+    .footer-col ul li {
+      margin-bottom: 0.75rem;
+    }
+    .footer-col ul li a {
+      font-size: 0.9375rem;
+      color: var(--text-soft);
+      transition: color 0.25s var(--ease-precise);
+    }
+    .footer-col ul li a:hover { color: var(--accent); }
+
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid var(--line-soft);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      color: var(--text-mute);
+    }
+
+    /* ============================================
+       REVEAL ANIMATIONS
+       ============================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 1s var(--ease-quiet), transform 1s var(--ease-quiet);
+      will-change: opacity, transform;
+    }
+    .reveal.is-in {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal[data-delay="1"] { transition-delay: 0.1s; }
+    .reveal[data-delay="2"] { transition-delay: 0.2s; }
+    .reveal[data-delay="3"] { transition-delay: 0.3s; }
+    .reveal[data-delay="4"] { transition-delay: 0.4s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      .hero-caret { display: none; }
+    }
+
+    /* ============================================
+       CUSTOM CURSOR
+       ============================================ */
+    .cursor-dot {
+      position: fixed;
+      top: 0; left: 0;
+      width: 4px; height: 4px;
+      background: var(--text);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-100px, -100px);
+      transition: width 0.25s var(--ease-precise), height 0.25s var(--ease-precise), background 0.25s var(--ease-precise), border 0.25s var(--ease-precise);
+      mix-blend-mode: difference;
+    }
+    .cursor-dot.is-hover {
+      width: 36px;
+      height: 36px;
+      background: transparent;
+      border: 1px solid var(--accent);
+      mix-blend-mode: normal;
+    }
+    @media (pointer: coarse) {
+      .cursor-dot { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cursor-dot { display: none; }
+    }
+
+    /* ============================================
+       UTILITIES
+       ============================================ */
+    .visually-hidden {
+      position: absolute !important;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 760px) {
+      .hero-meta { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Aller au contenu principal</a>
+  <div class="cursor-dot" aria-hidden="true"></div>
+
+  <!-- ============================================
+       HEADER
+       ============================================ -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <a href="#" class="brand" aria-label="Capsud Tunisie — retour à l'accueil">
+        CAPSUD<span class="brand-dot">.</span>
+        <span class="brand-tag">Tunisie</span>
+      </a>
+
+      <nav aria-label="Navigation principale">
+        <ul class="nav-links">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#process">Processus</a></li>
+          <li><a href="#pourquoi">Pourquoi nous</a></li>
+          <li><a href="#projets">Projets</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <a href="tel:+21655162938" class="nav-cta" aria-label="Appeler le 55 162 938">
+        55 162 938
+      </a>
+
+      <button class="nav-menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================================
+         HERO
+         ============================================ -->
+    <section class="hero" aria-labelledby="hero-title">
+      <canvas class="hero-canvas" aria-hidden="true"></canvas>
+      <div class="container">
+        <p class="eyebrow hero-eyebrow reveal">Installateur photovoltaïque · Tunisie,gabes</p>
+        <h1 id="hero-title" class="reveal" data-delay="1">
+          Capsud<br />
+          <span class="accent">Tunisie,gabes</span>
+        </h1>
+        <p class="hero-subtitle reveal" data-delay="2">
+          <span class="hero-typed" aria-live="off"></span><span class="hero-caret" aria-hidden="true"></span>
+        </p>
+        <div class="hero-cta reveal" data-delay="3">
+          <a href="tel:+21655162938" class="btn btn-primary">
+            Appeler le 55 162 938
+            <svg class="btn-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M2 8h12M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+            </svg>
+          </a>
+          <a href="#projets" class="btn btn-secondary">
+            Voir nos projets
+            <svg class="btn-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M2 8h12M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+            </svg>
+          </a>
+        </div>
+
+        <div class="hero-meta reveal" data-delay="4">
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Téléphone</span>
+            <span class="hero-meta-value"><a href="tel:+21655162938">55 162 938</a></span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Facebook</span>
+            <span class="hero-meta-value"><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">assia bouchaa</a></span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Zones</span>
+            <span class="hero-meta-value">Tunis · Sousse ·djerba.gabes.hammemet</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Certifications</span>
+            <span class="hero-meta-value">ANME · PROSOL</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         STATS
+         ============================================ -->
+    <section class="stats" aria-label="Chiffres clés">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat reveal">
+            <div class="stat-value">12<span class="unit">+</span></div>
+            <div class="stat-label">Années d'activité</div>
+          </div>
+          <div class="stat reveal" data-delay="1">
+            <div class="stat-value">8,4<span class="unit">MWc</span></div>
+            <div class="stat-label">Puissance installée</div>
+          </div>
+          <div class="stat reveal" data-delay="2">
+            <div class="stat-value">340<span class="unit">+</span></div>
+            <div class="stat-label">Projets livrés</div>
+          </div>
+          <div class="stat reveal" data-delay="3">
+            <div class="stat-value">24<span class="unit">h</span></div>
+            <div class="stat-label">Intervention SAV</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         SERVICES
+         ============================================ -->
+    <section id="services" class="services" aria-labelledby="services-title">
+      <div class="container">
+        <div class="services-head">
+          <div>
+            <p class="eyebrow reveal">Services</p>
+            <h2 id="services-title" class="section-title reveal" data-delay="1">
+              Quatre domaines d'intervention, une même exigence de exécution.
+            </h2>
+          </div>
+          <p class="section-intro reveal" data-delay="2">
+            Du panneau sur toiture résidentielle à la centrale industrielle en
+            autoconsommation, nous couvrons toute la chaîne — étude de faisabilité,
+            dimensionnement, pose, raccordement STEG et maintenance préventive.
+          </p>
+        </div>
+
+        <div class="services-list">
+          <article class="service-row reveal">
+            <div class="service-num">01</div>
+            <h3 class="service-title">Solaire résidentiel</h3>
+            <p class="service-desc">
+              Autoconsommation et revente du surplus pour villas et immeubles.
+              Dimensionnement sur mesure selon votre facture STEG, pose en
+              surimposition ou intégrée, raccordement et mise en service inclus.
+            </p>
+            <div class="service-tag">3 — 9 kWc</div>
+          </article>
+
+          <article class="service-row reveal">
+            <div class="service-num">02</div>
+            <h3 class="service-title">Solaire industriel &amp; tertiaire</h3>
+            <p class="service-desc">
+              Toitures et ombrières photovoltaïques pour usines, entrepôts logistiques,
+              centres commerciaux. Autoconsommation totale ou partielle avec
+              suivi de production en temps réel et reporting mensuel.
+            </p>
+            <div class="service-tag">30 — 2 000 kWc</div>
+          </article>
+
+          <article class="service-row reveal">
+            <div class="service-num">03</div>
+            <h3 class="service-title">Pompage solaire</h3>
+            <p class="service-desc">
+              Systèmes d'irrigation et d'abreuvement pour exploitations agricoles.
+              Pompes immergées sur variateur MPPT, stockage hydraulique sans batterie,
+              autonomie complète sur les périmètres hors réseau STEG.
+            </p>
+            <div class="service-tag">1,5 — 55 kWc</div>
+          </article>
+
+          <article class="service-row reveal">
+            <div class="service-num">04</div>
+            <h3 class="service-title">Stockage &amp; hybride</h3>
+            <p class="service-desc">
+              Parcs batteries lithium pour continuité d'activité, sites isolés
+              et secours de secours. Couplage AC ou DC sur installation existante,
+              pilotage intelligent des flux, compatibilité groupes électrogènes.
+            </p>
+            <div class="service-tag">5 — 200 kWh</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         PROCESS
+         ============================================ -->
+    <section id="process" class="process" aria-labelledby="process-title">
+      <div class="container">
+        <div class="process-left">
+          <p class="eyebrow reveal">Processus</p>
+          <h2 id="process-title" class="section-title reveal" data-delay="1">
+            Une installation solaire se prépare. Nous menons toute la séquence.
+          </h2>
+          <p class="reveal" data-delay="2">
+            Un projet photovoltaïque ne se résume pas à poser des panneaux.
+            C'est un montage technique, réglementaire et financier qui s'étale
+            sur plusieurs semaines. Nous en portons chaque étape, de la première
+            visite au suivi post-livraison.
+          </p>
+          <div class="process-contact reveal" data-delay="3">
+            Parler d'un projet&nbsp;?
+            <a href="tel:+21655162938">55 162 938</a>
+          </div>
+        </div>
+
+        <div class="process-steps">
+          <article class="process-step reveal">
+            <div class="process-step-num">ÉTAPE 01</div>
+            <div>
+              <h3>Étude de faisabilité</h3>
+              <p>
+                Analyse de vos factures STEG sur 12 mois, évaluation du gisement
+                solaire de votre site, simulation de production et calcul de
+                rentabilité financière. Livraison d'un dossier de cadrage.
+              </p>
+              <ul>
+                <li>Analyse consommation</li>
+                <li>Ensoleillement site</li>
+                <li>ROI &amp; TRI</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="process-step reveal">
+            <div class="process-step-num">ÉTAPE 02</div>
+            <div>
+              <h3>Conception technique</h3>
+              <p>
+                Dimensionnement exact du champ PV, choix des onduleurs, schéma
+                électrique, notes de calcul et plan d'exécution. Validation
+                structure par bureau d'études et dépôt du dossier STEG-ANME.
+              </p>
+              <ul>
+                <li>Notes de calcul</li>
+                <li>Schémas électriques</li>
+                <li>Dossier ANME</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="process-step reveal">
+            <div class="process-step-num">ÉTAPE 03</div>
+            <div>
+              <h3>Installation &amp; raccordement</h3>
+              <p>
+                Pose par équipes certifiées, génie civil, fixation, câblage
+                continu, mise à la terre, onduleurs et coffrets. Tests de
+                continuité, raccordement STEG et mise en service officielle.
+              </p>
+              <ul>
+                <li>Pose certifiée</li>
+                <li>Raccordement STEG</li>
+                <li>Mise en service</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="process-step reveal">
+            <div class="process-step-num">ÉTAPE 04</div>
+            <div>
+              <h3>Suivi &amp; maintenance</h3>
+              <p>
+                Surveillance de production à distance, alertes automatiques,
+                entretien préventif annuel, lavage des modules et intervention
+                corrective sous 24h. Garantie décennale sur la structure.
+              </p>
+              <ul>
+                <li>Monitoring 24/7</li>
+                <li>Entretien annuel</li>
+                <li>SAV 24h</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         WHY US
+         ============================================ -->
+    <section id="pourquoi" class="why-us" aria-labelledby="why-title">
+      <div class="container">
+        <div class="why-head">
+          <p class="eyebrow reveal">Pourquoi Capsud</p>
+          <h2 id="why-title" class="section-title reveal" data-delay="1">
+            Quatre raisons de confier votre installation à un installateur local.
+          </h2>
+        </div>
+
+        <div class="why-grid">
+          <article class="why-item reveal">
+            <span class="why-num">01 — CERTIFICATION</span>
+            <h3>Installateur agréé ANME</h3>
+            <p>
+              Capsud est inscrit au registre des installateurs agréés par
+              l'Agence Nationale pour la Maîtrise de l'Énergie. Vos dossiers
+              PROSOL et PROSOL Industriel sont montés en interne, sans
+              intermédiaire.
+            </p>
+          </article>
+
+          <article class="why-item reveal" data-delay="1">
+            <span class="why-num">02 — PROXIMITÉ</span>
+            <h3>Équipes basées en Tunisie</h3>
+            <p>
+              Nos installateurs et techniciens sont présents à Tunis, Sousse
+              et Sfax. Aucun sous-traitance à l'aveugle, aucun délai d'attente
+              de plusieurs semaines pour une intervention.
+            </p>
+          </article>
+
+          <article class="why-item reveal" data-delay="2">
+            <span class="why-num">03 — SAVIDEGARDE</span>
+            <h3>SAV garanti sous 24h</h3>
+            <p>
+              Contrat de maintenance écrit, intervention sous 24 heures sur
+              tout le Nord, le Centre et le Sahel. Monitoring distant inclus
+              sur toutes les installations supérieures à 10 kWc.
+            </p>
+          </article>
+
+          <article class="why-item reveal" data-delay="3">
+            <span class="why-num">04 — FINANCEMENT</span>
+            <h3>Accompagnement PROSOL</h3>
+            <p>
+              Nous montons votre dossier de financement PROSOL avec la banque
+              de votre choix, demandons la prime ANME et suivons le décaissement.
+              Vous signez, nous traitons le reste.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         PROJECTS
+         ============================================ -->
+    <section id="projets" class="projects" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="projects-head">
+          <div>
+            <p class="eyebrow reveal">Réalisations</p>
+            <h2 id="projects-title" class="section-title reveal" data-delay="1">
+              Quelques installations représentatives.
+            </h2>
+          </div>
+          <p class="section-intro reveal" data-delay="2">
+            Sélection non exhaustive. Dossiers techniques détaillés et retours
+            de production disponibles sur demande.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card reveal">
+            <div class="project-image">
+              <img src="Downloads/cap.jpg"  loading="lazy" />
+            </div>
+            <div class="project-meta">
+              <span class="project-tag">Industriel · </span>
+              <h3 class="project-title">Toiture industrielle — </h3>
+              <p class="project-desc">
+                480 kWc en autoconsommation totale sur usine de textile.
+                1 160 modules, 4 onduleurs string, monitoring de production
+                intégré au SCADA de l'usine.
+              </p>
+              <div class="project-specs">
+                <div>
+                  Puissance
+                  <strong>480 kWc</strong>
+                </div>
+                <div>
+                  Production
+                  <strong>720 MWh/an</strong>
+                </div>
+                <div>
+                  Livré
+                  <strong>2023</strong>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-delay="1">
+            <div class="project-image">
+              <img src="Downloads/cap2.jpg" loading="lazy" />
+            </div>
+            <div class="project-meta">
+              <span class="project-tag">Agricole · </span>
+              <h3 class="project-title">Ferme agricole — </h3>
+              <p class="project-desc">
+                Pompage solaire 22 kWc pour irrigation d'une exploitation
+                oléicole. Autonomie totale hors réseau, stockage hydraulique
+                en réservoir surélevé, variateur MPPT.
+              </p>
+              <div class="project-specs">
+                <div>
+                  Puissance
+                  <strong>22 kWc</strong>
+                </div>
+                <div>
+                  Débit
+                  <strong>120 m³/j</strong>
+                </div>
+                <div>
+                  Livré
+                  <strong>2024</strong>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-delay="2">
+            <div class="project-image">
+              <img src="Downloads/cap3.jpg"lazy" />
+            </div>
+            <div class="project-meta">
+              <span class="project-tag">Résidentiel · </span>
+              <h3 class="project-title">projet </h3>
+              <p class="project-desc">
+                9 kWc en autoconsommation avec revente du surplus pour une
+                villa de 320 m². Pose en surimposition sur tuiles, onduleur
+                micro-inverteurs, suivi de production mobile.
+              </p>
+              <div class="project-specs">
+                <div>
+                  Puissance
+                  <strong>9 kWc</strong>
+                </div>
+                <div>
+                  Couverture
+                  <strong>78 %</strong>
+                </div>
+                <div>
+                  Livré
+                  <strong>2024</strong>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-delay="3">
+            <div class="project-image">
+              <img src="Downloads/cap4.jpg" loading="lazy" />
+            </div>
+            <div class="project-meta">
+              <span class="project-tag">Tertiaire · </span>
+              <h3 class="project-title">Station logistique — </h3>
+              <p class="project-desc">
+                1,2 MWc en ombrière de parking pour une plateforme logistique.
+                2 880 modules, 12 onduleurs, refroidissement passif des zones
+                de chargement, facture STEG réduite de 64 %.
+              </p>
+              <div class="project-specs">
+                <div>
+                  Puissance
+                  <strong>1,2 MWc</strong>
+                </div>
+                <div>
+                  Économie
+                  <strong>64 %</strong>
+                </div>
+                <div>
+                  Livré
+                  <strong>2023</strong>
+                 
+                </div>
+              </div>
+            </div>
+            <video controls width="800" height="400" src="https://www.facebook.com/reel/2380293475744296"></video>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         CONTACT
+         ============================================ -->
+    <section id="contact" class="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="contact-left">
+          <p class="eyebrow reveal">Contact</p>
+          <h2 id="contact-title" class="section-title reveal" data-delay="1">
+            Parlons de votre projet solaire.
+          </h2>
+          <p class="reveal" data-delay="2">
+            Un coup de fil suffit pour démarrer. Nous programmons une visite
+            de site, analysons vos factures STEG et vous renvoyons une
+            proposition chiffrée sous 7 jours.
+          </p>
+
+          <a href="tel:+21655162938" class="contact-phone reveal" data-delay="3" aria-label="Appeler le 55 162 938">
+            <span class="contact-phone-label">Téléphone — appel direct</span>
+            <span class="contact-phone-value">55 162 938</span>
+          </a>
+
+          <div class="contact-channels reveal" data-delay="4">
+            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" class="contact-channel">
+              <span class="contact-channel-label">Facebook</span>
+              <span class="contact-channel-value">assia bouchaa</span>
+            </a>
+            <div class="contact-channel">
+              <span class="contact-channel-label">Zones</span>
+              <span class="contact-channel-value">Tunis · Sousse · hammemet djerba gabes</span>
+            </div>
+            <div class="contact-channel">
+              <span class="contact-channel-label">Horaires</span>
+              <span class="contact-channel-value">Lun — Sam · 8h à 18h</span>
+            </div>
+            <div class="contact-channel">
+              <span class="contact-channel-label">Urgence SAV</span>
+              <span class="contact-channel-value">24h / 24 · 7j / 7</span>
+            </div>
+          </div>
+        </div>
+
+        <form class="contact-form reveal" data-delay="2" aria-label="Formulaire de demande de devis">
+          <h3>Demander une étude</h3>
+          <p class="form-sub">Réponse sous 24h ouvrées. Sans engagement.</p>
+
+          <div class="form-row">
+            <label for="f-name">Nom complet</label>
+            <input type="text" id="f-name" name="name" required autocomplete="name" />
+          </div>
+
+          <div class="form-row">
+            <label for="f-phone">Téléphone</label>
+            <input type="tel" id="f-phone" name="phone" required autocomplete="tel" placeholder="+216" />
+          </div>
+
+          <div class="form-row">
+            <label for="f-email">Email <span class="visually-hidden">(optionnel)</span></span></label>
+            <input type="email" id="f-email" name="email" autocomplete="email" />
+          </div>
+
+          <div class="form-row">
+            <label for="f-type">Type de projet</label>
+            <select id="f-type" name="type">
+              <option value="">Sélectionner…</option>
+              <option value="residentiel">Résidentiel (villa, immeuble)</option>
+              <option value="industriel">Industriel / tertiaire</option>
+              <option value="agricole">Pompage agricole</option>
+              <option value="stockage">Stockage batterie</option>
+              <option value="autre">Autre / je ne sais pas encore</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="f-message">Message</label>
+            <textarea id="f-message" name="message" placeholder="Adresse du site, consommation mensuelle STEG si connue, contraintes particulières…"></textarea>
+          </div>
+
+          <button type="submit" class="form-submit" value="https://www.instagram.com/zehry_lina?igsh=MTcyOXNmcTJjcjY4dw==" >
+            Envoyer la demande
+            <svg class="btn-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M2 8h12M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+            </svg>
+          </button>
+
+          <p class="form-note">
+            En envoyant ce formulaire, vous acceptez d'être recontacté par
+            Capsud Tunisie au sujet de votre demande. Vos données ne sont
+            pas transmises à des tiers.
+          </p>
+          
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="brand">
+            CAPSUD<span class="brand-dot">.</span>
+            <span class="brand-tag">Tunisie</span>
+          </a>
+          <p>
+            Installateur photovoltaïque tunisien. Conception, pose et
+            maintenance de systèmes solaires pour le résidentiel, l'industrie
+            et l'agriculture.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">Solaire résidentiel</a></li>
+            <li><a href="#services">Solaire industriel</a></li>
+            <li><a href="#services">Pompage solaire</a></li>
+            <li><a href="#services">Stockage batterie</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Société</h4>
+          <ul>
+            <li><a href="#pourquoi">Pourquoi nous</a></li>
+            <li><a href="#projets">Réalisations</a></li>
+            <li><a href="#process">Processus</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:+21655162938">55 162 938</a></li>
+            <li><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook · assia bouchaa</a></li>
+            <li><a href="#contact">Demande de devis</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© <span id="year">2025</span> Capsud Tunisie gabes — Tous droits réservés.</div>
+        <div>Installateur agréé ANME · Programme PROSOL</div>
+        
+        
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ============================================
+    // UTILITIES
+    // ============================================
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+
+    // ============================================
+    // YEAR
+    // ============================================
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ============================================
+    // REVEAL ON SCROLL
+    // ============================================
+    (function() {
+      const reveals = document.querySelectorAll('.reveal');
+      if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+        reveals.forEach(el => el.classList.add('is-in'));
+        return;
+      }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      reveals.forEach(el => io.observe(el));
+    })();
+
+    // ============================================
+    // HERO TYPEWRITER
+    // ============================================
+    (function() {
+      const span = document.querySelector('.hero-typed');
+      const caret = document.querySelector('.hero-caret');
+      if (!span) return;
+
+      const text = 'Installateur photovoltaïque en Tunisie. Étude, conception, pose et maintenance de systèmes solaires pour le résidentiel, l\'industrie et l\'agriculture.';
+
+      if (prefersReducedMotion) {
+        span.textContent = text;
+        if (caret) caret.classList.add('is-hidden');
+        return;
+      }
+
+      let i = 0;
+      const speed = 32;
+      function tick() {
+        if (i < text.length) {
+          span.textContent += text.charAt(i);
+          i++;
+          setTimeout(tick, speed);
+        } else {
+          // blink caret a few times then hide
+          let blinks = 0;
+          let on = true;
+          const blink = setInterval(() => {
+            on = !on;
+            caret.classList.toggle('is-hidden', !on);
+            blinks++;
+            if (blinks >= 6) {
+              clearInterval(blink);
+              caret.classList.add('is-hidden');
+            }
+          }, 400);
+        }
+      }
+      // small delay before start
+      setTimeout(tick, 800);
+    })();
+
+    // ============================================
+    // HERO CANVAS — GLYPH RAIN
+    // ============================================
+    (function() {
+      const canvas = document.querySelector('.hero-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      let width, height, columns, drops;
+      const charSet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ+−×÷=ΩΦλ°%/';
+      const fontSize = 14;
+      const colSpacing = 20;
+
+      function resize() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        width = canvas.clientWidth;
+        height = canvas.clientHeight;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        columns = Math.floor(width / colSpacing);
+        drops = new Array(columns).fill(0).map(() => Math.random() * -height);
+      }
+
+      let running = true;
+      let lastFrame = 0;
+      const frameInterval = 1000 / 30; // ~30fps
+
+      function draw(t) {
+        if (!running) return;
+        if (t - lastFrame < frameInterval) {
+          requestAnimationFrame(draw);
+          return;
+        }
+        lastFrame = t;
+
+        ctx.fillStyle = 'rgba(10, 10, 10, 0.08)';
+        ctx.fillRect(0, 0, width, height);
+
+        ctx.font = fontSize + 'px "JetBrains Mono", monospace';
+        ctx.textBaseline = 'top';
+
+        for (let i = 0; i < columns; i++) {
+          const x = i * colSpacing;
+          const y = drops[i];
+          const ch = charSet[Math.floor(Math.random() * charSet.length)];
+          // bright leading character
+          if (Math.random() > 0.975) {
+            ctx.fillStyle = '#cba25f';
+          } else {
+            ctx.fillStyle = 'rgba(203, 162, 95, 0.55)';
+          }
+          ctx.fillText(ch, x, y);
+
+          drops[i] += fontSize + 2;
+          if (drops[i] > height && Math.random() > 0.975) {
+            drops[i] = -fontSize * 5;
+          }
+        }
+        requestAnimationFrame(draw);
+      }
+
+      resize();
+      window.addEventListener('resize', () => {
+        resize();
+      });
+
+      // pause when hero off-screen
+      const hero = document.querySelector('.hero');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            running = entry.isIntersecting && !prefersReducedMotion;
+            if (running) requestAnimationFrame(draw);
+          });
+        }, { threshold: 0 });
+        io.observe(hero);
+      }
+
+      if (!prefersReducedMotion) {
+        requestAnimationFrame(draw);
+      } else {
+        // static frame
+        ctx.fillStyle = 'rgba(10,10,10,1)';
+        ctx.fillRect(0, 0, width, height);
+      }
+    })();
+
+    // ============================================
+    // CUSTOM CURSOR
+    // ============================================
+    (function() {
+      if (isTouch || prefersReducedMotion) return;
+      const dot = document.querySelector('.cursor-dot');
+      if (!dot) return;
+
+      let mouseX = -100, mouseY = -100;
+      let dotX = -100, dotY = -100;
+
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      // hover targets
+      const hoverSel = 'a, button, .service-row, .why-item, .project-card, input, textarea, select';
+      document.addEventListener('mouseover', (e) => {
+        if (e.target.closest(hoverSel)) dot.classList.add('is-hover');
+      });
+      document.addEventListener('mouseout', (e) => {
+        if (e.target.closest(hoverSel)) dot.classList.remove('is-hover');
+      });
+
+      function tick() {
+        dotX += (mouseX - dotX) * 0.22;
+        dotY += (mouseY - dotY) * 0.22;
+        dot.style.transform = `translate(${dotX - 2}px, ${dotY - 2}px)`;
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    })();
+
+    // ============================================
+    // MOBILE NAV TOGGLE
+    // ============================================
+    (function() {
+      const toggle = document.querySelector('.nav-menu-toggle');
+      const nav = document.querySelector('.nav-links');
+      if (!toggle || !nav) return;
+
+      toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!expanded));
+        if (expanded) {
+          nav.style.display = '';
+        } else {
+          nav.style.display = 'flex';
+          nav.style.position = 'absolute';
+          nav.style.top = '100%';
+          nav.style.left = '0';
+          nav.style.right = '0';
+          nav.style.flexDirection = 'column';
+          nav.style.background = 'var(--bg)';
+          nav.style.padding = '1.5rem 2rem';
+          nav.style.borderBottom = '1px solid var(--line)';
+          nav.style.gap = '1rem';
+        }
+      });
+
+      // close on resize > 860
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 860) {
+          nav.style.display = '';
+          nav.style.position = '';
+          nav.style.top = '';
+          nav.style.left = '';
+          nav.style.right = '';
+          nav.style.flexDirection = '';
+          nav.style.background = '';
+          nav.style.padding = '';
+          nav.style.borderBottom = '';
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+
+    // ============================================
+    // FORM (demo — no backend)
+    // ============================================
+    (function() {
+      const form = document.querySelector('.contact-form');
+      if (!form) return;
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const btn = form.querySelector('.form-submit');
+        const original = btn.innerHTML;
+        btn.innerHTML = 'Demande envoyée — merci';
+        btn.style.background = '#7a9b6e';
+        setTimeout(() => {
+          btn.innerHTML = original;
+          btn.style.background = '';
+          form.reset();
+        }, 3000);
+      });
+    })();
+
+    // ============================================
+    // ACTIVE NAV LINK ON SCROLL
+    // ============================================
+    (function() {
+      const links = document.querySelectorAll('.nav-links a');
+      const sections = ['services', 'process', 'pourquoi', 'projets', 'contact']
+        .map(id => document.getElementById(id))
+        .filter(Boolean);
+
+      if (!sections.length || !('IntersectionObserver' in window)) return;
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            links.forEach(link => {
+              const href = link.getAttribute('href');
+              if (href === '#' + id) {
+                link.setAttribute('aria-current', 'page');
+              } else {
+                link.removeAttribute('aria-current');
+              }
+            });
+          }
+        });
+      }, { rootMargin: '-40% 0px -55% 0px' });
+
+      sections.forEach(s => io.observe(s));
+    })();
+  </script>
+</body>
+</html>
